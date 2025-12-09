@@ -1,6 +1,6 @@
 @extends('partials.layouts')
 @section('title', 'SMTC-TC | Shaping Minds, Changing Lives')
- <link rel="icon" type="image/png" href="{{ asset('assets/images/Logo.png') }}">
+ <link rel="icon" type="image/png" href="{{ asset('assets/images/l1.jpg') }}">
     <!-- Begin page content -->
   <div class="container-fluid mt-4 img-fluid fixed w-100 h-100 pt-2">
     @include('welcome')
