@@ -1,0 +1,28 @@
+services:
+  - type: web
+    name: tr-app
+    env: docker
+    repo: https://github.com/Raskevoh/TR
+    region: oregon
+    plan: free
+    branch: main
+    dockerfilePath: Dockerfile
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: false
+      - key: APP_KEY
+        sync: false
+      - key: DB_CONNECTION
+        value: pgsql
+      - key: DB_HOST
+        value: dpg-d4t75o56ubrc73ef1u2g-a.oregon-postgres.render.com
+      - key: DB_PORT
+        value: 5432
+      - key: DB_DATABASE
+        value: tr_w0ci
+      - key: DB_USERNAME
+        value: tr_w0ci_user
+      - key: DB_PASSWORD
+        sync: false
