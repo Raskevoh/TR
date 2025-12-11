@@ -3,9 +3,11 @@
 @section('content')
 @section('title','Siloam College - Application Form')
 <link rel="stylesheet" href="{{ asset('assets/main.css') }}">
+
 <div class="container my-5 d-flex justify-content-center">
     <div class="card shadow-lg p-4" style="max-width: 600px; width: 100%;">
-      @if ($errors->any())
+
+        @if ($errors->any())
             <div class="alert alert-danger">
                 <ul>
                     @foreach ($errors->all() as $error)
@@ -21,32 +23,43 @@
 
         <h3 class="mb-4 text-center">Course Application Form</h3>
 
-        <form action="{{ route('academic.application.store') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('academic.application.store') }}" method="POST" enctype="multipart/form-data" autocomplete="on">
             @csrf
 
-            <label class="form-label">Full Names</label>
-            <input type="text" name="name" class="form-control" required>
+            <div class="mb-3">
+                <label for="name" class="form-label">Full Names</label>
+                <input type="text" id="name" name="name" class="form-control" autocomplete="name" required>
+            </div>
 
-            <label class="form-label mt-3">Email</label>
-            <input type="email" name="email" class="form-control" required>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" id="email" name="email" class="form-control" autocomplete="email" required>
+            </div>
 
-            <label class="form-label">Phone Number</label>
+            <div class="mb-3">
+                <label for="phone" class="form-label">Phone Number</label>
+                <input id="phone" name="phone" type="tel" class="form-control" autocomplete="tel" required>
+            </div>
 
-            <input id="phone" name="phone" type="tel" class="form-control" required>
+            <div class="mb-3">
+                <label for="course" class="form-label">Select Course</label>
+                <select id="course" name="course" class="form-select" required autocomplete="off">
+                    <option value="">-- Select Course --</option>
+                    @foreach($courses as $course)
+                        <option value="{{ $course->id }}">{{ $course->name }}</option>
+                    @endforeach
+                </select>
+            </div>
 
-            <label class="form-label">Select Course</label>
-           <select name="course" class="form-select" required>
-    <option value="">-- Select Course --</option>
-    @foreach($courses as $course)
-        <option value="{{ $course->id }}">{{ $course->name }}</option>
-    @endforeach
-</select>
+            <div class="mb-3">
+                <label for="id_scan" class="form-label">Upload ID</label>
+                <input type="file" id="id_scan" name="id_scan" class="form-control" required>
+            </div>
 
-            <label class="form-label mt-3">Upload ID</label>
-            <input type="file" name="id_scan" class="form-control" required>
-
-             <label class="form-label mt-3">Academic Cerificates</label>
-            <input type="file" name="academic_certificates" class="form-control" required>
+            <div class="mb-3">
+                <label for="academic_certificates" class="form-label">Academic Certificates</label>
+                <input type="file" id="academic_certificates" name="academic_certificates" class="form-control" required>
+            </div>
 
             <button class="btn btn-success w-100 mt-4" type="submit">Submit Application</button>
         </form>

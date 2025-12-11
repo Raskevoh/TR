@@ -7,10 +7,11 @@
     <meta name="generator" content="Astro v5.13.2" />
 
     <title>@yield('title', 'Page Title')</title>
-    <link rel="icon" type="image/png/jpg" href="{{ asset('assets/images/log1.jpg') }}?v=1">
+    <link rel="icon" type="image/png/jpg" href="{{ asset('assets/images/LOGO.jpg') }}?v=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-
+         {{-- Vite assets --}}
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     <meta name="theme-color" content="#712cf9" />
 </head>
 <body class="d-flex flex-column min-vh-100">
