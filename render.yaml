@@ -7,6 +7,7 @@ services:
     plan: free
     branch: main
     dockerfilePath: Dockerfile
+
     envVars:
       - key: APP_ENV
         value: production
@@ -14,6 +15,41 @@ services:
         value: false
       - key: APP_KEY
         sync: false
+      - key: APP_URL
+        value: https://tr-0okp.onrender.com
+      - key: ASSET_URL
+        value: https://tr-0okp.onrender.com
+      - key: DB_CONNECTION
+        value: pgsql
+      - key: DB_HOST
+        value: dpg-d4t75o56ubrc73ef1u2g-a.oregon-postgres.render.com
+      - key: DB_PORT
+        value: 5432
+      - key: DB_DATABASE
+        value: tr_w0ci
+      - key: DB_USERNAME
+        value: tr_w0ci_user
+      - key: DB_PASSWORD
+        sync: false
+      - key: APP_PORT
+        value: 10000
+      - key: PORT
+        value: 10000
+      - key: VITE_APP_URL
+        value: https://tr-0okp.onrender.com
+
+  - type: job
+    name: tr-migrations
+    env: docker
+    repo: https://github.com/Raskevoh/TR
+    branch: main
+    dockerfilePath: Dockerfile
+    schedule: "on-deploy"
+    command: "php artisan migrate --force"
+
+    envVars:
+      - key: APP_ENV
+        value: production
       - key: DB_CONNECTION
         value: pgsql
       - key: DB_HOST
