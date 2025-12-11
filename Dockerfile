@@ -21,8 +21,7 @@ RUN apt-get update && apt-get install -y \
         bcmath \
         gd \
         zip \
-        pdo_pgsql \
-    && docker-php-ext-enable pdo_pgsql
+        pdo_pgsql
 
 # Install Composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
@@ -38,25 +37,19 @@ RUN composer install --no-dev --optimize-autoloader
 # Build frontend assets (Vite)
 RUN npm install && npm run build
 
-# Set permissions for storage & cache
+# Set permissions
 RUN chown -R www-data:www-data storage bootstrap/cache
 
-# Run Laravel config cache and migrations during build (forces env usage)
-RUN php artisan config:clear \
- && php artisan config:cache \
- && php artisan route:cache \
- && php artisan view:cache \
- && php artisan migrate --force
+# ⛔ REMOVE ALL ARTISAN COMMANDS (THEY BREAK IMAGE BUILD)
 
 # Stage 2: Runtime image
 FROM php:8.2-cli
 
 WORKDIR /var/www/html
 
-# Copy everything from build stage
+# Copy built application
 COPY --from=php-base /var/www/html /var/www/html
 
-# Expose Laravel port
 EXPOSE 10000
 
 # Start Laravel server
